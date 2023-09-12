@@ -15,14 +15,14 @@ class FlutterJdCps {
   /// [appKey] appKey
   /// [appSecret] 秘钥
   Future<JdCpsResult> initJD({required String appKey, required String appSecret}) async {
-    final js = FlutterJdCpsPlatform.instance.initJD(appKey: appKey, appSecret: appSecret);
+    final js = await FlutterJdCpsPlatform.instance.initJD(appKey: appKey, appSecret: appSecret);
     final data = JdCpsResult.fromJson(js);
     return data;
   }
 
   /// 开启京东商品页
   Future<JdCpsResult> openUrl(String url) async {
-    final js = FlutterJdCpsPlatform.instance.openUrl(url);
+    final js = await FlutterJdCpsPlatform.instance.openUrl(url);
     final data = JdCpsResult.fromJson(js);
     return data;
   }

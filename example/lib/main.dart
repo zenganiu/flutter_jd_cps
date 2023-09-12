@@ -31,8 +31,7 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _flutterJdCpsPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _flutterJdCpsPlugin.getPlatformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -54,8 +53,34 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            children: [
+              Center(child: Text('Running on: $_platformVersion\n')),
+              Center(
+                child: OutlinedButton(
+                  onPressed: () async {
+                    final result = await _flutterJdCpsPlugin.initJD(
+                      appKey: "760e9fa49765a185f06812d7454abdeb",
+                      appSecret: "b4220bcc0286402487534cf94ae7c8ea",
+                    );
+                    debugPrint(result.toString());
+                  },
+                  child: const Text('初始化'),
+                ),
+              ),
+              Center(
+                child: OutlinedButton(
+                  onPressed: () async {
+                    final result = await _flutterJdCpsPlugin.openUrl("https://u.jd.com/TLp0MTT");
+                    debugPrint(result.toString());
+                  },
+                  child: const Text('打开链接'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

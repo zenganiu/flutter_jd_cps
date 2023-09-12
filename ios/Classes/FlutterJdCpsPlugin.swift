@@ -23,6 +23,10 @@ public class FlutterJdCpsPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)
+        case "initJD":
+            initJD(call, result: result)
+        case "openUrl":
+            openUrl(call, result: result)
         default:
             result(FlutterMethodNotImplemented)
         }
